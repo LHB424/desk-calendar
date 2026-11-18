@@ -1,0 +1,7 @@
+node_modules/
+dist/
+
+# 개인 데이터와 메모 (공개하지 않음)
+events.json
+STORE.md
+build/icon-old.*

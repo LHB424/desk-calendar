@@ -1,0 +1,74 @@
+{
+  "name": "desk-calendar",
+  "version": "0.2.5",
+  "private": true,
+  "description": "바탕화면에 띄워 두는 달력",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "dist": "electron-builder --win",
+    "dist:store": "electron-builder --win appx"
+  },
+  "build": {
+    "appId": "local.desk-calendar",
+    "productName": "바탕화면 달력",
+    "electronVersion": "45.3.3",
+    "electronDist": "node_modules/electron/dist",
+    "directories": {
+      "output": "dist"
+    },
+    "files": [
+      "main.js",
+      "preload.js",
+      "index.html",
+      "app.js",
+      "style.css",
+      "holidays.js",
+      "package.json"
+    ],
+    "win": {
+      "icon": "build/icon.png",
+      "target": [
+        "nsis",
+        "portable"
+      ]
+    },
+    "nsis": {
+      "oneClick": false,
+      "perMachine": false,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true,
+      "runAfterFinish": true,
+      "installerLanguages": [
+        "ko_KR"
+      ],
+      "language": "1042",
+      "installerIcon": "build/icon.ico",
+      "uninstallerIcon": "build/icon.ico",
+      "installerHeaderIcon": "build/icon.ico",
+      "shortcutName": "바탕화면 달력",
+      "artifactName": "desk-calendar-setup-${version}.${ext}"
+    },
+    "appx": {
+      "identityName": "TODO.DeskCalendar",
+      "publisher": "CN=TODO-PUBLISHER-ID",
+      "publisherDisplayName": "TODO",
+      "displayName": "바탕화면 달력",
+      "applicationId": "DeskCalendar",
+      "backgroundColor": "transparent",
+      "languages": [
+        "ko-KR",
+        "en-US"
+      ],
+      "artifactName": "desk-calendar-store-${version}.${ext}"
+    },
+    "portable": {
+      "artifactName": "desk-calendar-portable-${version}.${ext}"
+    }
+  },
+  "devDependencies": {
+    "electron": "45.3.3",
+    "electron-builder": "^26.0.12"
+  }
+}

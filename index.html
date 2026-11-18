@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline'" />
+    <title>달력</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <main class="card">
+      <header class="head">
+        <div class="title">
+          <span class="month" id="month"></span>
+          <span class="year" id="year"></span>
+        </div>
+        <nav class="nav">
+          <button id="today" class="pill" title="오늘로">오늘</button>
+          <button id="prev" class="icon" title="이전 달" aria-label="이전 달">
+            <svg viewBox="0 0 16 16"><path d="M10 3 5 8l5 5" /></svg>
+          </button>
+          <button id="next" class="icon" title="다음 달" aria-label="다음 달">
+            <svg viewBox="0 0 16 16"><path d="m6 3 5 5-5 5" /></svg>
+          </button>
+          <button id="menu" class="icon" title="메뉴" aria-label="메뉴">
+            <svg viewBox="0 0 16 16" class="dots"><circle cx="3" cy="8" r="1.2" /><circle cx="8" cy="8" r="1.2" /><circle cx="13" cy="8" r="1.2" /></svg>
+          </button>
+          <button id="lock" class="icon lock" title="잠그기" aria-label="잠그기" aria-pressed="false">
+            <svg viewBox="0 0 16 16" class="unlocked"><rect x="3" y="7" width="10" height="7" rx="1.8" /><path d="M5.2 7V5.2a2.8 2.8 0 0 1 5.4-1" /></svg>
+            <svg viewBox="0 0 16 16" class="locked"><rect x="3" y="7" width="10" height="7" rx="1.8" /><path d="M5.2 7V5.2a2.8 2.8 0 0 1 5.6 0V7" /></svg>
+          </button>
+        </nav>
+      </header>
+
+      <div class="cal">
+        <div class="week">
+          <span class="sun">일</span><span>월</span><span>화</span><span>수</span><span>목</span><span>금</span><span class="sat">토</span>
+        </div>
+        <div class="grid" id="grid"></div>
+      </div>
+
+      <div class="split" id="split" title="끌어서 넓이 조절 · 두 번 누르면 처음대로"></div>
+      <section class="agenda">
+        <div class="agenda-head">
+          <span id="picked"></span>
+          <span class="dday" id="dday"></span>
+        </div>
+        <ul class="list" id="list"></ul>
+        <form id="add" class="add">
+          <input id="input" type="text" maxlength="40" placeholder="일정 추가" autocomplete="off" spellcheck="false" />
+        </form>
+        <div class="soon-head" id="soonHead">다가오는 일정</div>
+        <ul class="list soon" id="soon"></ul>
+      </section>
+
+      <!-- 처음 켤 때만 뜨는 설정 카드. 테마와 투명도는 고르는 대로 바로 보인다 -->
+      <section class="setup" id="setup" hidden>
+        <div class="setup-head">
+          <h1>처음 설정</h1>
+          <p>메뉴(⋯)에서 언제든 다시 바꿀 수 있어요.</p>
+        </div>
+        <div class="setup-body">
+          <div class="field">
+            <span class="label">테마</span>
+            <div class="seg" id="sTheme">
+              <button type="button" data-v="system">시스템</button>
+              <button type="button" data-v="light">라이트</button>
+              <button type="button" data-v="dark">다크</button>
+            </div>
+          </div>
+          <div class="field">
+            <span class="label">배경 투명도 <b id="sAlphaOut"></b></span>
+            <input id="sAlpha" type="range" min="0" max="60" step="10" />
+          </div>
+          <div class="field">
+            <span class="label">처음 자리</span>
+            <div class="corners" id="sCorner">
+              <button type="button" data-v="tl" aria-label="왼쪽 위"></button>
+              <button type="button" data-v="tr" aria-label="오른쪽 위"></button>
+              <button type="button" data-v="bl" aria-label="왼쪽 아래"></button>
+              <button type="button" data-v="br" aria-label="오른쪽 아래"></button>
+            </div>
+          </div>
+          <label class="toggle" id="sAutoRow"><span>윈도우 켤 때 같이 켜기</span><input id="sAuto" type="checkbox" /><i></i></label>
+          <label class="toggle"><span>항상 위에 두기</span><input id="sTop" type="checkbox" /><i></i></label>
+        </div>
+        <button type="button" class="start" id="sStart">시작하기</button>
+      </section>
+    </main>
+    <div class="grips" aria-hidden="true">
+      <i data-edge="n"></i><i data-edge="s"></i><i data-edge="e"></i><i data-edge="w"></i>
+      <i data-edge="ne"></i><i data-edge="nw"></i><i data-edge="se"></i><i data-edge="sw"></i>
+    </div>
+    <script src="holidays.js"></script>
+    <script src="app.js"></script>
+  </body>
+</html>
